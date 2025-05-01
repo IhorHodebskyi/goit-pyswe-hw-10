@@ -1,0 +1,70 @@
+{% extends 'app_main/base.html' %} {% block content %}
+<section class="section">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1>Add Author</h1>
+            </div>
+        </div>
+        <form action="{% url 'app_main:add_author' %}" method="post" class="col-6">
+            {% csrf_token %} {% if form.errors and form.non_field_errors %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                </svg>
+                <div>{{ form.non_field_errors }}</div>
+            </div>
+
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="{{ form.fullname.id_for_label }}" class="form-label"
+                >Full Name</label
+                >
+                {{ form.fullname }}
+                <span>{{ form.fullname.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.born_date.id_for_label }}" class="form-label"
+                >Born Date</label
+                >
+                {{ form.born_date }}
+                <span>{{ form.born_date.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.born_location.id_for_label }}" class="form-label"
+                >Born Location</label
+                >
+                {{ form.born_location }}
+                <span>{{ form.born_location.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.description.id_for_label }}" class="form-label"
+                >Description</label
+                >
+                {{ form.description }}
+                <span>{{ form.description.errors }}</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        {% for author in authors %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ author.fullname }}</h5>
+                <p class="card-text">{{ author.born_date }}</p>
+                <p class="card-text">{{ author.born_location }}</p>
+                <p class="card-text">{{ author.description }}</p>
+                <a href="{% url 'app_main:remove' author.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'app_main:edit' author.id %}" class="btn btn-success">Update</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}
+

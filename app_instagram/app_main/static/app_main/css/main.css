@@ -1,0 +1,48 @@
+
+html {
+  font-size: clamp(6px, 0.52vw, 10px);
+}
+
+@media screen and (max-width: 991px) {
+  html {
+    font-size: clamp(6px, 1vw, 10px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: clamp(6px, 1.35vw, 10px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: clamp(6px, 2.56vw, 10px);
+  }
+}
+
+
+
+
+
+body{
+    background-color: #000000;
+    color: #ffffff;
+}
+
+li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.section{
+    padding: 5rem 0;
+}
+
+.container{
+    max-width: 120rem;
+    padding: 0 1.5rem;
+    overflow: hidden;
+}

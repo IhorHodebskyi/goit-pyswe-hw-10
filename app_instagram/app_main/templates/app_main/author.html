@@ -1,0 +1,35 @@
+{% extends 'app_main/base.html' %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ author.fullname }}</h1>
+            </div>
+        </div>
+        {% if author%}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ author.fullname }}</h5>
+                <p class="card-text">{{ author.born_date }}</p>
+                <p class="card-text">{{ author.born_location }}</p>
+                <p class="card-text">{{ author.description }}</p>
+
+                <h6>Quotes:</h6>
+                {% for quote in author.quote_set.all %}
+                <blockquote class="blockquote">
+                    <p>{{ quote.quote }}</p>
+                    <footer class="blockquote-footer">Tags: {{ quote.tags }}</footer>
+                </blockquote>
+                {% empty %}
+                <p><em>No quotes available for this author.</em></p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+
+</section>
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'app_main/base.html' %} {% block content %}
+<section class="section">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1>Edit</h1>
+            </div>
+        </div>
+        <form action="{% url 'app_main:edit' author_id %}" method="post" class="col-6">
+            {% csrf_token %} {% if form.errors and form.non_field_errors %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                </svg>
+                <div>{{ form.non_field_errors }}</div>
+            </div>
+
+            {% endif %}
+
+            <div class="mb-3">
+                <label class="form-label"
+                >Full Name
+                    <input type="text" name="fullname" value="{{ author.fullname }}"></label>
+                <span>{{ form.fullname.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"
+                >Born Date
+                    <input type="date" name="born_date" value="{{ author.born_date }}"></label>
+                <span>{{ form.born_date.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"
+                >Born Location
+                    <input type="text" name="born_location" value="{{ author.born_location }}"></label>
+                <span>{{ form.born_location.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"
+                >Description
+                    <input type="text" name="description" value="{{ author.description }}"></label>
+                <span>{{ form.description.errors }}</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+    </div>
+</section>
+{% endblock content %}
+

@@ -1,0 +1,59 @@
+{% extends 'app_main/base.html' %} {% block content %}
+<section class="section">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1>Register User</h1>
+            </div>
+        </div>
+        <form method="post" class="col-6">
+            {% csrf_token %}
+            {% if form.errors and form.non_field_errors %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                </svg>
+                <div>
+                    {{ form.non_field_errors }}
+                </div>
+            </div>
+
+            {% endif %}
+
+            <div class="mb-3">
+                <label class="form-label"
+                >User Name
+                    {{ form.username }}
+                </label>
+                <span>{{ form.username.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"
+                >Email
+                    {{ form.email }}</label
+                >
+                <span>{{ form.email.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label  class="form-label"
+                >Password
+                    {{ form.password1 }}</label>
+                <span>{{ form.password1.errors }}</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"
+                >Confirm Password
+                    {{ form.password2 }}</label>
+                <span>{{ form.password2.errors }}</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+    </div>
+</section>
+{% endblock content %}
