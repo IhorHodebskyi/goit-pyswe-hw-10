@@ -1,8 +1,12 @@
-from django.shortcuts import render, redirect
 from django.views import View
 from .forms import RegisterForm
+
 from django.contrib import messages
-from django.views.generic import TemplateView
+
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -26,3 +30,12 @@ class RegisterView(View):
             messages.success(request, f'Account created for {username}')
             return redirect(to='app_auth:signin')
         return render(request, self.template_name, {'form': form})
+
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'app_auth/password_reset.html'  # Заміни на правильний шаблон
+    email_template_name = 'app_auth/password_reset_email.html'  # І цей також
+    html_email_template_name = 'app_auth/password_reset_email.html'  # І цей
+    success_url = reverse_lazy('app_auth:password_reset_done')  # Переконайся, що цей URL правильний
+    success_message = "An email with instructions to reset your password has been sent to %(email)s."
+    subject_template_name = 'app_auth/password_reset_subject.txt'  # І цей шаблон
